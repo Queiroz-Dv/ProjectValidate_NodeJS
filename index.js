@@ -22,10 +22,35 @@ app.use(flash());
 
 //Routes 
 app.get("/", (request, response) => {
-  console.log("Está rodando");
-  response.send("Running...");
+  response.render("index");
 });
 
+app.post("/form", (request, response) => {
+  var { email, nome, pontos } = request.body;
+
+  var emailError;
+  var pontosError;
+  var nomeError;
+
+  if (email == undefined || email == "") {
+    emailError = "E-mail inválido";
+  }
+
+  if (pontos == undefined || pontos < 20) {
+    pontosError = "Você não pode ter menos de 20 pontos";
+  }
+
+  if (nome == undefined || nome == "") {
+    nomeError = "O nome não pode ser vazio";
+  }
+  if (emailError != undefined ||
+    pontosError != undefined ||
+    nomeError != undefined) {
+    response.redirect("/");
+  } else {
+    response.send("Validação realizada com sucesso");
+  }
+});
 
 app.listen(1103, (request, response) => {
   console.log("Server Running");
