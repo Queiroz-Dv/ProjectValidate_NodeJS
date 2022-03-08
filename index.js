@@ -26,7 +26,31 @@ app.use(flash());
 
 //Routes 
 app.get("/", (request, response) => {
-  response.render("index");
+  var emailError = request.flash("emailError");
+  var pontosError = request.flash("pontosError");
+  var nomeError = request.flash("nomeError");
+  var email = request.flash("email");
+  var pontos = request.flash("pontos");
+  var nome = request.flash("nome");
+
+  emailError = (emailError == undefined || emailError.length == 0) ? undefined : emailError;
+  pontosError = (pontosError == undefined || pontosError.length == 0) ? undefined : pontosError;
+  nomeError = (nomeError == undefined || nomeError.length == 0) ? undefined : nomeError;
+
+  email = (email == undefined || email.length == 0) ? "" : email;
+  pontos = (pontos == undefined || pontos.length == 0) ? "" : pontos;
+  nome = (nome == undefined || nome.length == 0) ? "" : nome;
+
+
+  response.render("index", {
+    emailError,
+    pontosError,
+    nomeError,
+
+    email: email,
+    pontos: pontos,
+    nome: nome,
+  });
 });
 
 app.post("/form", (request, response) => {
@@ -50,6 +74,14 @@ app.post("/form", (request, response) => {
   if (emailError != undefined ||
     pontosError != undefined ||
     nomeError != undefined) {
+    request.flash("emailError", emailError);
+    request.flash("pontosError", pontosError);
+    request.flash("nomeError", nomeError);
+
+    request.flash("email", email);
+    request.flash("pontos", pontos);
+    request.flash("nome", nome);
+
     response.redirect("/");
   } else {
     response.send("Validação realizada com sucesso");
