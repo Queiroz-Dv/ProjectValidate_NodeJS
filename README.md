@@ -47,19 +47,21 @@ Objetivo do projeto é estudar como funciona as  validações através de um for
 Existem dois tipos de validações: 
 
 - Validações do lado do cliente 
+  
   No lado do cliente as validações são feitas através dos campos do HTML , contudo esta técnica não oferece segurança, pois o usuário pode remover o atributo *"required"* e enviar os dados sem nenhum problema.
   Código de exemplo:
-
+  
   ```html
   <input type="email" name="email" id="email" placeholder="email" required><br>
   ```
-
   
-
+  
+  
 - Validações do lado do servidor
+  
   São validações realizadas no back end, ou seja, no próprio servidor sem o acesso do cliente. 
   Código de exemplo:
-
+  
   ```js
   if (email == undefined || email == "") {
       emailError = "E-mail inválido";
@@ -80,7 +82,7 @@ Existem dois tipos de validações:
       response.send("Validação realizada com sucesso");
     }
   ```
-
+  
   
 
 Cada aplicação determina qual tipo de validação será realizado, neste caso, as regras de negócio irão se aplicar ao que a aplicação precisa para o seu pleno funcionamento.
@@ -165,3 +167,6 @@ Em seguida atribuímos os valores para a view:
     <%= pontosError %> <br>
 ```
 
+Este é mais um resumo finalizado para fins de estudos. 
+
+Se gostou desse conteúdo, deixe uma star e acompanhe os outros repositórios! Em breve estarei colocando os links para ajudar na organização. 
